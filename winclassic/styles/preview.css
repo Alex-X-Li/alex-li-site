@@ -1,0 +1,39 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* Dimensions */
+#preview {
+  width: 411px;
+  height: 219px;
+  margin: 0em 1em 1em;
+  border-style: inset;
+  border-width: 2px;
+  position: relative;
+}
+
+#window-inactive {
+  width: 371px;
+  height: 175px;
+  top: 10px;
+  left: 10px;
+}
+
+#window-active {
+  width: 389px;
+  height: 157px;
+  top: 33px;
+  left: 14px;
+}
+
+#window-dialog {
+  width: 239px;
+  height: 80px;
+  left: 22px;
+  top: 133px;
+}
+
+#active-scroll-pane {
+  display: block;
+  flex-grow: 1;
+}

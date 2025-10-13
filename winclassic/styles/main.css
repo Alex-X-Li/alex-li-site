@@ -1,0 +1,33 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+#customizer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#controls {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-basis: 30em;
+}
+
+#meta-controls {
+  flex-basis: 100%;
+}
+
+fieldset {
+  display: inline-block;
+}
+
+#controls fieldset label {
+  display: block;
+  white-space: pre;
+}
+
+#import-action {
+  vertical-align: top;
+}
