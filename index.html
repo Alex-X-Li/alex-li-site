@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 98 Desktop • Powered by 98.js Assets</title>
+    <link rel="stylesheet" href="os-gui/build/windows-98.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Iconography sourced from 98.js (https://98.js.org/). -->
+</head>
+<body>
+    <!-- Desktop -->
+    <div class="desktop" aria-label="Windows 98 desktop">
+        <div class="desktop-icon" data-window="welcome" tabindex="0">
+            <img class="icon-image" src="https://98.js.org/images/icons/windows-update-32x32.png" alt="" aria-hidden="true">
+            <div class="icon-label">Welcome</div>
+        </div>
+
+        <div class="desktop-icon" data-window="my-computer" tabindex="0">
+            <img class="icon-image" src="https://98.js.org/images/icons/my-computer-32x32.png" alt="" aria-hidden="true">
+            <div class="icon-label">My Computer</div>
+        </div>
+
+        <div class="desktop-icon" data-window="network" tabindex="0">
+            <img class="icon-image" src="https://98.js.org/images/icons/network-32x32.png" alt="" aria-hidden="true">
+            <div class="icon-label">Network Neighborhood</div>
+        </div>
+
+        <div class="desktop-icon" data-window="internet" tabindex="0">
+            <img class="icon-image" src="https://98.js.org/images/icons/internet-explorer-32x32.png" alt="" aria-hidden="true">
+            <div class="icon-label">Internet Explorer</div>
+        </div>
+
+        <div class="desktop-icon" data-window="notepad" tabindex="0">
+            <img class="icon-image" src="https://98.js.org/images/icons/notepad-32x32.png" alt="" aria-hidden="true">
+            <div class="icon-label">Notepad</div>
+        </div>
+
+        <div class="desktop-icon" data-window="recycle-bin" tabindex="0">
+            <img class="icon-image" src="https://98.js.org/images/icons/recycle-bin-32x32.png" alt="" aria-hidden="true">
+            <div class="icon-label">Recycle Bin</div>
+        </div>
+    </div>
+
+    <!-- Windows -->
+    <div class="window" id="welcome" data-initial="true" data-icon="https://98.js.org/images/icons/windows-update-32x32.png" data-width="540" data-height="360">
+        <div class="title-bar">
+            <div class="title-bar-text">
+                <img src="https://98.js.org/images/icons/windows-update-32x32.png" alt="" aria-hidden="true">
+                <span>Welcome - Windows 98</span>
+            </div>
+            <div class="title-bar-controls">
+                <button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="maximize-btn" aria-label="Maximize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="menu-bar">
+            <div class="menu-item">File</div>
+            <div class="menu-item">Edit</div>
+            <div class="menu-item">View</div>
+        </div>
+        <div class="window-body">
+            <div class="welcome-pane">
+                <div class="welcome-text">
+                    <div class="welcome-heading">
+                        <img src="https://98.js.org/images/icons/windows-update-32x32.png" alt="Windows update icon" class="welcome-logo">
+                        <h1>Welcome to Xiang (Alex) Li's forgotten computer.</h1>
+                    </div>
+                    <p>Here you will find what he has been (secretly) doing recently.</p>
+                    <img src="Pics/img_6845.jpg" alt="Xiang (Alex) Li" class="welcome-photo">
+                    <p> Xiang (Alex) Li (any pronouns) is a PhD student at the Simon Fraser University, 
+                        and research assistant at TRIUMF. He works with the nEXO collaboration 
+                        on the Light-only Liquid Xenon (LoLX) R&D project.
+                        His research centers on characterizing the performance of Silicon Photomultipliers (SiPMs) 
+                        and investigating scintillation and light production in liquid xenon, 
+                        which are important for studying neutrinoless double beta decay 
+                        and for detector technology using liquid xenon and SiPMs.
+                    </p>
+                    <p>
+                        The website is still under construction. Check out the "Internet Explorer" on the desktop to see his latest research and publications! 
+                    </p>
+                    <small>This site is inspired by and credits <a href="https://98.js.org/" target="_blank" rel="noopener">98.js</a>.</small>
+                </div>
+            </div>
+        </div>
+        <div class="status-bar">
+            <p class="status-bar-field">Press Start to begin</p>
+        </div>
+    </div>
+
+    <div class="window" id="my-computer" style="display: none;" data-icon="https://98.js.org/images/icons/my-computer-32x32.png" data-width="480" data-height="300">
+        <div class="title-bar">
+            <div class="title-bar-text">
+                <img src="https://98.js.org/images/icons/my-computer-32x32.png" alt="" aria-hidden="true">
+                <span>My Computer</span>
+            </div>
+            <div class="title-bar-controls">
+                <button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="maximize-btn" aria-label="Maximize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="menu-bar">
+            <div class="menu-item">File</div>
+            <div class="menu-item">Edit</div>
+            <div class="menu-item">View</div>
+            <div class="menu-item">Go</div>
+            <div class="menu-item">Help</div>
+        </div>
+        <div class="window-body">
+            <h2>Drives</h2>
+            <div class="icon-grid">
+                <div class="folder-icon">
+                    <img class="icon-image" src="https://98.js.org/images/icons/my-computer-32x32.png" alt="" aria-hidden="true">
+                    <div class="icon-label">Local Disk (C:)</div>
+                </div>
+                <div class="folder-icon">
+                    <img class="icon-image" src="https://98.js.org/images/icons/folder-32x32.png" alt="" aria-hidden="true">
+                    <div class="icon-label">CD Drive (D:)</div>
+                </div>
+                <div class="folder-icon" data-window="my-documents" tabindex="0">
+                    <img class="icon-image" src="https://98.js.org/images/icons/my-documents-folder-32x32.png" alt="" aria-hidden="true">
+                    <div class="icon-label">My Documents</div>
+                </div>
+            </div>
+        </div>
+        <div class="status-bar">
+            <p class="status-bar-field">4 object(s)</p>
+        </div>
+    </div>
+
+    <div class="window" id="my-documents" style="display: none;" data-icon="https://98.js.org/images/icons/my-documents-folder-32x32.png" data-width="460" data-height="320">
+        <div class="title-bar">
+            <div class="title-bar-text">
+                <img src="https://98.js.org/images/icons/my-documents-folder-32x32.png" alt="" aria-hidden="true">
+                <span>My Documents</span>
+            </div>
+            <div class="title-bar-controls">
+                <button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="maximize-btn" aria-label="Maximize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="menu-bar">
+            <div class="menu-item">File</div>
+            <div class="menu-item">Edit</div>
+            <div class="menu-item">Favorites</div>
+            <div class="menu-item">Help</div>
+        </div>
+        <div class="toolbar">
+            <button class="toolbar-btn">Up</button>
+            <button class="toolbar-btn">Cut</button>
+            <button class="toolbar-btn">Copy</button>
+            <button class="toolbar-btn">Paste</button>
+        </div>
+        <div class="window-body">
+            <p>Files stored in My Documents:</p>
+            <ul class="projects-list">
+                <li>
+                    <span class="projects-title">Resume.doc</span>
+                    <span class="projects-desc">Updated in Word 97 and ready to print.</span>
+                </li>
+                <li>
+                    <span class="projects-title">Screenshots.bmp</span>
+                    <span class="projects-desc">Captured with Print Screen for UI references.</span>
+                </li>
+                <li>
+                    <span class="projects-title">Retro-Web-Notes.txt</span>
+                    <span class="projects-desc">Ideas for future Windows 98 themed experiments.</span>
+                </li>
+            </ul>
+        </div>
+        <div class="status-bar">
+            <p class="status-bar-field">Ready</p>
+        </div>
+    </div>
+
+    <div class="window" id="internet" style="display: none;" data-icon="https://98.js.org/images/icons/internet-explorer-32x32.png" data-width="520" data-height="340">
+        <div class="title-bar">
+            <div class="title-bar-text">
+                <img src="https://98.js.org/images/icons/internet-explorer-32x32.png" alt="" aria-hidden="true">
+                <span>Internet Explorer</span>
+            </div>
+            <div class="title-bar-controls">
+                <button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="maximize-btn" aria-label="Maximize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="menu-bar">
+            <div class="menu-item">File</div>
+            <div class="menu-item">Edit</div>
+            <div class="menu-item">View</div>
+            <div class="menu-item">Favorites</div>
+            <div class="menu-item">Tools</div>
+            <div class="menu-item">Help</div>
+        </div>
+        <div class="toolbar">
+            <button class="toolbar-btn">Back</button>
+            <button class="toolbar-btn">Forward</button>
+            <button class="toolbar-btn">Stop</button>
+            <button class="toolbar-btn">Refresh</button>
+            <button class="toolbar-btn">Home</button>
+        </div>
+        <div class="address-bar">
+            <label>Address:</label>
+            <input type="text" value="http://www.alexli-online.com/start.html" readonly>
+        </div>
+        <div class="window-body browser">
+            <div class="browser-content">
+                <div class="browser-hero">
+                    <div class="hero-glow">eNavigator 98 :: Alex Li Online</div>
+                    <p>Break out of the dial-up blues and jump straight to my favorite web hangouts. </p>
+                    <p>Let's surf the Internet now!</p>
+                </div>
+
+                <div class="browser-links">
+                    <div class="browser-card">
+                        <div class="card-icon card-icon--orcid" aria-hidden="true"></div>
+                        <div class="card-body">
+                            <h3>ORCID Profile</h3>
+                            <p>Verify my researcher ID and track official publications.</p>
+                            <a class="card-link" href="https://orcid.org/0009-0006-0322-3017" target="_blank" rel="noopener">Launch</a>
+                        </div>
+                    </div>
+
+                    <div class="browser-card">
+                        <div class="card-icon card-icon--scholar" aria-hidden="true"></div>
+                        <div class="card-body">
+                            <h3>Google Scholar</h3>
+                            <p>Browse citations, metrics, and the latest updates to my research.</p>
+                            <a class="card-link" href="https://scholar.google.ca/citations?hl=en&amp;user=QpPZlyoAAAAJ" target="_blank" rel="noopener">Launch</a>
+                        </div>
+                    </div>
+
+                    <div class="browser-card">
+                        <div class="card-icon card-icon--github" aria-hidden="true"></div>
+                        <div class="card-body">
+                            <h3>GitHub</h3>
+                            <p>Dive into code experiments, analyses, and project archives.</p>
+                            <a class="card-link" href="https://github.com/Alex-X-Li" target="_blank" rel="noopener">Launch</a>
+                        </div>
+                    </div>
+
+                    <div class="browser-card">
+                        <div class="card-icon card-icon--linkedin" aria-hidden="true"></div>
+                        <div class="card-body">
+                            <h3>LinkedIn Feed</h3>
+                            <p>Connect professionally and follow along with my latest updates.</p>
+                            <a class="card-link" href="https://www.linkedin.com/feed/" target="_blank" rel="noopener">Launch</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="browser-footer">
+                    <span>Powered by HTML 4.01 and a splash of Y2K optimism.</span>
+                    <span class="browser-badge">Best viewed at 1024×768</span>
+                </div>
+            </div>
+        </div>
+        <div class="status-bar">
+            <p class="status-bar-field">Done</p>
+        </div>
+    </div>
+
+    <div class="window" id="notepad" style="display: none;" data-icon="https://98.js.org/images/icons/notepad-32x32.png" data-width="440" data-height="340">
+        <div class="title-bar">
+            <div class="title-bar-text">
+                <img src="https://98.js.org/images/icons/notepad-32x32.png" alt="" aria-hidden="true">
+                <span>Untitled - Notepad</span>
+            </div>
+            <div class="title-bar-controls">
+                <button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="maximize-btn" aria-label="Maximize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="menu-bar">
+            <div class="menu-item">File</div>
+            <div class="menu-item">Edit</div>
+            <div class="menu-item">Search</div>
+            <div class="menu-item">Help</div>
+        </div>
+        <div class="window-body">
+            <textarea class="notepad-text" placeholder="Type here...">Dear Visitor,
+
+Thank you for visiting my site.
+
+Most of the content is still work in progress and will be updated soon! 
+
+If you want to view my latest research and papers, please open the Internet Explorer on the desktop!
+
+Happy hacking! UwU
+
+- Alex</textarea>
+        </div>
+    </div>
+
+    <div class="window" id="network" style="display: none;" data-icon="https://98.js.org/images/icons/network-32x32.png" data-width="380" data-height="280">
+        <div class="title-bar">
+            <div class="title-bar-text">
+                <img src="https://98.js.org/images/icons/network-32x32.png" alt="" aria-hidden="true">
+                <span>Network Neighborhood</span>
+            </div>
+            <div class="title-bar-controls">
+                <button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="maximize-btn" aria-label="Maximize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="about-pane">
+                <img src="https://98.js.org/images/icons/network-32x32.png" alt="Network icon">
+                <div>
+                    <p><strong>Network Neighborhood</strong></p>
+                    <p>Links to some of my friends, colleagues and research groups that I worked with:</p>
+                    <ul>
+                        <p> Research Groups:</p>
+                        <li> My current boss: <a href="https://triumf.ca/people/fabrice-retiere/" target="_blank" rel="noopener">Fabrice Retiere (TRIUMF)</a></li>
+                        <li> Fellow PhD student in nEXO and LoLX: <a href="https://davidgallacherphysics.com/index.html#physics" target="_blank" rel="noopener">David Gallacher</a></li>
+                        <li> Experiment affiliation: <a href="https://nexoexperiment.org/" target="_blank" rel="noopener">nEXO Experiment</a></li>
+                        <li> My master's supervisor: <a href="https://sites.google.com/ualberta.ca/pirolab/" target="_blank" rel="noopener">Marie-cecile Piro</a></li>
+                        <p> Friends links:</p>
+                        <li> Technical support for building this site: <a href="https://escobarflughafen.github.io/" target="_blank" rel="noopener">Li, Jianing</a></li>
+                        <li> A friend friend doing EE: <a href="https://blog.cedard.top/" target="_blank" rel="noopener">Cedar</a>
+
+                    <!-- <p>Right-click to map network drives or explore other 98.js desktops.</p> -->
+                </div>
+            </div>
+        </div>
+        <div class="status-bar">
+            <p class="status-bar-field">Status: Connected</p>
+        </div>
+    </div>
+
+    <div class="window" id="recycle-bin" style="display: none;" data-icon="https://98.js.org/images/icons/recycle-bin-32x32.png" data-width="380" data-height="280">
+        <div class="title-bar">
+            <div class="title-bar-text">
+                <img src="https://98.js.org/images/icons/recycle-bin-32x32.png" alt="" aria-hidden="true">
+                <span>Recycle Bin</span>
+            </div>
+            <div class="title-bar-controls">
+                <button class="minimize-btn" aria-label="Minimize"></button>
+                <button class="maximize-btn" aria-label="Maximize"></button>
+                <button class="close-btn" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="menu-bar">
+            <div class="menu-item">File</div>
+            <div class="menu-item">Edit</div>
+            <div class="menu-item">View</div>
+            <div class="menu-item">Help</div>
+        </div>
+        <div class="window-body">
+            <p> <H1> <strong>Here lies the hopes and dreams of Alex.</strong></H1></p>
+            <p>You do not have permission to access <strong>Recycle Bin</strong>.</p>
+        </div>
+        <div class="status-bar">
+            <p class="status-bar-field">999+ object(s)</p>
+        </div>
+    </div>
+
+    <!-- Taskbar -->
+    <div class="taskbar">
+        <button class="start-button" aria-haspopup="true" aria-controls="start-menu" aria-label="Start menu">
+            <span class="start-icon" aria-hidden="true"></span>
+            <span class="start-label">Start</span>
+        </button>
+        <div class="taskbar-tasks" id="taskbar-tasks"></div>
+        <div class="system-tray">
+            <div class="tray-icon" aria-label="Task Scheduler">
+                <img src="https://98.js.org/images/icons/task-scheduler-16x16.png" alt="Task Scheduler">
+            </div>
+            <div class="tray-icon" aria-label="Volume">
+                <img src="https://98.js.org/images/icons/audio-okay-16x16.png" alt="Volume">
+            </div>
+            <div class="clock" id="clock" aria-live="polite">12:00 PM</div>
+        </div>
+    </div>
+
+    <!-- Start Menu -->
+    <div class="start-menu" id="start-menu" style="display: none;" role="menu">
+        <div class="start-menu-sidebar">
+            <div class="start-menu-sidebar-text">Windows <strong>98</strong></div>
+        </div>
+        <div class="start-menu-content">
+            <div class="start-menu-item has-submenu" tabindex="0" role="menuitem" aria-haspopup="true">
+                <img class="menu-icon" src="https://98.js.org/images/icons/folder-32x32.png" alt="" aria-hidden="true">
+                <span>Programs</span>
+                <div class="start-menu-submenu">
+                    <button class="start-menu-subitem" data-window="internet" role="menuitem">
+                        <img src="https://98.js.org/images/icons/internet-explorer-32x32.png" alt="" aria-hidden="true">
+                        <span>Internet Explorer</span>
+                    </button>
+                    <button class="start-menu-subitem" data-window="notepad" role="menuitem">
+                        <img src="https://98.js.org/images/icons/notepad-32x32.png" alt="" aria-hidden="true">
+                        <span>Notepad</span>
+                    </button>
+                </div>
+            </div>
+            <button class="start-menu-item" data-window="my-documents" role="menuitem">
+                <img class="menu-icon" src="https://98.js.org/images/icons/my-documents-folder-32x32.png" alt="" aria-hidden="true">
+                <span>My Documents</span>
+            </button>
+            <button class="start-menu-item" data-window="my-computer" role="menuitem">
+                <img class="menu-icon" src="https://98.js.org/images/icons/my-computer-32x32.png" alt="" aria-hidden="true">
+                <span>My Computer</span>
+            </button>
+            <button class="start-menu-item" data-window="network" role="menuitem">
+                <img class="menu-icon" src="https://98.js.org/images/icons/network-32x32.png" alt="" aria-hidden="true">
+                <span>Network Neighborhood</span>
+            </button>
+            <button class="start-menu-item" data-window="recycle-bin" role="menuitem">
+                <img class="menu-icon" src="https://98.js.org/images/icons/recycle-bin-32x32.png" alt="" aria-hidden="true">
+                <span>Recycle Bin</span>
+            </button>
+            <div class="start-menu-separator"></div>
+            <button class="start-menu-item" data-action="shutdown" role="menuitem">
+                <img class="menu-icon" src="https://98.js.org/images/icons/windows-update-32x32.png" alt="" aria-hidden="true">
+                <span>Shut Down...</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
