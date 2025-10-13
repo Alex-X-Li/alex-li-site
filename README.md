@@ -35,8 +35,4 @@ If you reuse this project, please preserve these attributions and abide by the r
 
 This repository is a personal website and is not accepting contributions or pull requests. Thank you for understanding.
 
-Note: No `LICENSE` file is provided for the site author’s original code; as such the repository defaults to "all rights reserved". Third-party components bundled in `winclassic/`, `os-gui/`, and other vendor directories retain their original license files — please do not remove or modify those files.
-
-----
-
-If you later decide you want to accept contributions, I can add a short `CONTRIBUTING.md` and an open license (MIT or similar). For now I’ve left the repo public but clearly marked it as not accepting PRs.
+Note: No `LICENSE` file is provided for the site author’s original code; as such the repository defaults to "all rights reserved". Third-party components bundled in `winclassic/`, `os-gui/`.
