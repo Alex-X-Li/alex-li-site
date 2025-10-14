@@ -57,8 +57,10 @@
 body {
     font-family: var(--font-ui);
     font-size: 11px;
-    background: var(--desktop-bg) url('wallpaper/tumblr_oi507k4irH1sdbgk2o1_640.gif');
-    background-repeat: repeat;
+    background-color: var(--desktop-bg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
     overflow: hidden;
     height: 100vh;
     cursor: default;

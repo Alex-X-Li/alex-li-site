@@ -11,9 +11,13 @@ let resizeStartY = 0;
 let resizeMinWidth = 0;
 let resizeMinHeight = 0;
 const TASKBAR_HEIGHT = 32;
+const WALLPAPER_PATH = 'wallpaper/';
+const MANIFEST_URL = `${WALLPAPER_PATH}manifest.json`;
+const DEFAULT_WALLPAPER = 'v_island.png'; // Fallback if manifest fails
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
+    setRandomWallpaper();
     initializeDesktopIcons();
     initializeFolderShortcuts();
     initializeWindows();
@@ -23,6 +27,30 @@ document.addEventListener('DOMContentLoaded', () => {
     updateClock();
     setInterval(updateClock, 1000);
 });
+
+function setRandomWallpaper() {
+    // Fetch manifest.json which lists available wallpapers.
+    // To add new wallpapers: 
+    // 1. Add image files to wallpaper/ folder
+    // 2. Run: npm run generate:wallpaper-manifest
+    // Or manually edit wallpaper/manifest.json
+    fetch(MANIFEST_URL, { cache: 'no-store' })
+        .then(resp => {
+            if (!resp.ok) throw new Error('Manifest not found');
+            return resp.json();
+        })
+        .then(list => {
+            if (!Array.isArray(list) || list.length === 0) throw new Error('Invalid manifest');
+            const filtered = list.filter(f => typeof f === 'string' && f.trim());
+            if (filtered.length === 0) throw new Error('No valid entries in manifest');
+            const idx = Math.floor(Math.random() * filtered.length);
+            document.body.style.backgroundImage = `url('${WALLPAPER_PATH}${filtered[idx]}')`;
+        })
+        .catch(() => {
+            // Fallback to default wallpaper
+            document.body.style.backgroundImage = `url('${WALLPAPER_PATH}${DEFAULT_WALLPAPER}')`;
+        });
+}
 
 // Desktop icons
 function initializeDesktopIcons() {

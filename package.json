@@ -1,0 +1,8 @@
+{
+  "name": "alex-li-site",
+  "version": "1.0.0",
+  "description": "Personal site with Windows 98 desktop theme",
+  "scripts": {
+    "generate:wallpaper-manifest": "node ./scripts/generate-wallpaper-manifest.js"
+  }
+}
