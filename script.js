@@ -41,15 +41,58 @@ function setRandomWallpaper() {
         })
         .then(list => {
             if (!Array.isArray(list) || list.length === 0) throw new Error('Invalid manifest');
-            const filtered = list.filter(f => typeof f === 'string' && f.trim());
+            
+            // Support both string format (legacy) and object format (with artist/location info)
+            const filtered = list.filter(item => {
+                if (typeof item === 'string') return item.trim();
+                if (typeof item === 'object' && item.filename) return item.filename.trim();
+                return false;
+            });
+            
             if (filtered.length === 0) throw new Error('No valid entries in manifest');
             const idx = Math.floor(Math.random() * filtered.length);
-            document.body.style.backgroundImage = `url('${WALLPAPER_PATH}${filtered[idx]}')`;
+            const selected = filtered[idx];
+            
+            // Handle both string and object format
+            const filename = typeof selected === 'string' ? selected : selected.filename;
+            const artist = typeof selected === 'object' ? selected.artist : '';
+            const location = typeof selected === 'object' ? selected.location : '';
+            
+            document.body.style.backgroundImage = `url('${WALLPAPER_PATH}${filename}')`;
+            updateArtistAttribution(artist, location);
         })
         .catch(() => {
             // Fallback to default wallpaper
             document.body.style.backgroundImage = `url('${WALLPAPER_PATH}${DEFAULT_WALLPAPER}')`;
+            updateArtistAttribution('', '');
         });
+}
+
+function updateArtistAttribution(artist, location) {
+    // Remove existing attribution if present
+    let attribution = document.querySelector('.wallpaper-attribution');
+    
+    // Determine what text to show
+    let text = '';
+    if (location && location.trim()) {
+        text = `Photo taken at ${location}`;
+    } else if (artist && artist.trim()) {
+        text = `Art by ${artist}`;
+    }
+    
+    if (text) {
+        if (!attribution) {
+            attribution = document.createElement('div');
+            attribution.className = 'wallpaper-attribution';
+            document.body.appendChild(attribution);
+        }
+        attribution.textContent = text;
+        attribution.style.display = 'block';
+    } else {
+        if (attribution) {
+            attribution.style.display = 'none';
+        }
+    }
 }
 
 // Desktop icons

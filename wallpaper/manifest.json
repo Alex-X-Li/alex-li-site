@@ -1,12 +1,42 @@
 [
-  "Avocado.png",
-  "Crab.png",
-  "Fish1.png",
-  "Fish2.png",
-  "Fish3.png",
-  "Nautilus.png",
-  "egg.gif",
-  "octopus.png",
-  "twitter_gif_1760475567407.gif",
-  "v_island.png"
+  {
+    "filename": "Avocado.png",
+    "artist": "Tsukumizu"
+  },
+  {
+    "filename": "Crab.png",
+    "artist": "Tsukumizu"
+  },
+  {
+    "filename": "Fish1.png",
+    "artist": "Tsukumizu"
+  },
+  {
+    "filename": "Fish2.png",
+    "artist": "Tsukumizu"
+  },
+  {
+    "filename": "Fish3.png",
+    "artist": "Tsukumizu"
+  },
+  {
+    "filename": "Nautilus.png",
+    "artist": "Tsukumizu"
+  },
+  {
+    "filename": "egg.gif",
+    "artist": "Tsukumizu"
+  },
+  {
+    "filename": "octopus.png",
+    "artist": "Tsukumizu"
+  },
+  {
+    "filename": "twitter_gif_1760475567407.gif",
+    "artist": "Tsukumizu"
+  },
+  {
+    "filename": "v_island.png",
+    "location": "Vancouver Island, Canada"
+  }
 ]
