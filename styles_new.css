@@ -185,7 +185,7 @@ img.icon-image,
 .start-icon {
     width: 20px;
     height: 20px;
-    background: url('https://98.js.org/images/icons/windows-update-32x32.png') no-repeat center/contain;
+    background: url('assets/icons/windows-update-32x32.png') no-repeat center/contain;
     flex-shrink: 0;
 }
 
