@@ -21,9 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeDesktopIcons();
     initializeFolderShortcuts();
     initializeWindows();
+    initializeExplorerChrome();
+    initializeStatusBars();
     initializeTaskbar();
     initializeStartMenu();
     registerOpenWindows();
+    openWindowFromUrl();
     updateClock();
     setInterval(updateClock, 1000);
 });
@@ -271,17 +274,25 @@ function registerOpenWindows() {
 function centerWindow(win) {
     const targetWidth = parseInt(win.dataset.width, 10) || 480;
     const targetHeight = parseInt(win.dataset.height, 10) || 360;
+    const isDesktopViewport = window.innerWidth >= 769;
+    const viewportPadding = isDesktopViewport ? 32 : 16;
+    const maxInitialWidth = Math.max(320, window.innerWidth - viewportPadding);
+    const maxInitialHeight = Math.max(220, window.innerHeight - TASKBAR_HEIGHT - viewportPadding);
+    const desktopWidth = Math.round(window.innerWidth * 0.5);
+    const desktopHeight = Math.round((window.innerHeight - TASKBAR_HEIGHT) * 0.8);
+    const initialWidth = Math.min(Math.max(targetWidth, isDesktopViewport ? desktopWidth : targetWidth), maxInitialWidth);
+    const initialHeight = Math.min(Math.max(targetHeight, isDesktopViewport ? desktopHeight : targetHeight), maxInitialHeight);
 
     if (!win.style.width) {
-        win.style.width = `${targetWidth}px`;
+        win.style.width = `${initialWidth}px`;
     }
 
     if (!win.style.height) {
-        win.style.height = `${targetHeight}px`;
+        win.style.height = `${initialHeight}px`;
     }
 
-    const currentWidth = parseInt(win.style.width, 10) || targetWidth;
-    const currentHeight = parseInt(win.style.height, 10) || targetHeight;
+    const currentWidth = parseInt(win.style.width, 10) || initialWidth;
+    const currentHeight = parseInt(win.style.height, 10) || initialHeight;
 
     const left = Math.max(0, (window.innerWidth - currentWidth) / 2);
     const top = Math.max(0, (window.innerHeight - currentHeight - TASKBAR_HEIGHT) / 2);
@@ -299,6 +310,17 @@ function openWindow(windowId) {
     win.style.display = 'flex';
     addTaskbarTask(windowId);
     bringToFront(win);
+}
+
+function openWindowFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const windowId = params.get('open');
+
+    if (!windowId) {
+        return;
+    }
+
+    openWindow(windowId);
 }
 
 function closeWindow(windowId) {
@@ -417,6 +439,370 @@ function stopResize() {
     resizingWindow = null;
 }
 
+// Explorer chrome
+function initializeExplorerChrome() {
+    document.querySelectorAll('.window').forEach(win => {
+        if (win.id === 'internet' || win.querySelector('.explorer-toolbar')) {
+            return;
+        }
+
+        win.querySelectorAll('.toolbar:not(.explorer-toolbar), .address-bar:not(.explorer-address-bar)').forEach(element => {
+            element.remove();
+        });
+
+        const anchor = win.querySelector('.menu-bar') || win.querySelector('.title-bar');
+        if (!anchor) {
+            return;
+        }
+
+        anchor.insertAdjacentElement('afterend', createExplorerAddressBar(win));
+        anchor.insertAdjacentElement('afterend', createStandardExplorerToolbar());
+    });
+}
+
+function createStandardExplorerToolbar() {
+    const toolbar = document.createElement('div');
+    toolbar.className = 'toolbar explorer-toolbar standard-explorer-toolbar';
+    toolbar.setAttribute('aria-label', 'Explorer toolbar');
+
+    toolbar.appendChild(createToolbarGripper());
+    toolbar.appendChild(createExplorerButton('Back', 'back', { muted: true, caret: true }));
+    toolbar.appendChild(createExplorerButton('Forward', 'forward', { muted: true, caret: true }));
+    toolbar.appendChild(createExplorerButton('Up', 'up'));
+    toolbar.appendChild(createToolbarSeparator());
+    toolbar.appendChild(createExplorerButton('Cut', 'cut'));
+    toolbar.appendChild(createExplorerButton('Copy', 'copy'));
+    toolbar.appendChild(createExplorerButton('Paste', 'paste'));
+    toolbar.appendChild(createToolbarSeparator());
+    toolbar.appendChild(createExplorerButton('Undo', 'undo'));
+    toolbar.appendChild(createToolbarSeparator());
+    toolbar.appendChild(createExplorerButton('Delete', 'delete'));
+    toolbar.appendChild(createExplorerButton('Properties', 'properties'));
+    toolbar.appendChild(createToolbarSeparator());
+    toolbar.appendChild(createExplorerButton('Views', 'views', { caret: true }));
+
+    return toolbar;
+}
+
+function createExplorerButton(label, icon, options = {}) {
+    const button = document.createElement('button');
+    button.className = `toolbar-btn explorer-toolbar-btn${options.muted ? ' is-muted' : ''}`;
+    button.type = 'button';
+
+    const iconElement = document.createElement('span');
+    iconElement.className = `toolbar-icon toolbar-icon--${icon}`;
+    iconElement.setAttribute('aria-hidden', 'true');
+    button.appendChild(iconElement);
+
+    const labelElement = document.createElement('span');
+    labelElement.className = 'toolbar-label';
+    labelElement.textContent = label;
+    button.appendChild(labelElement);
+
+    if (options.caret) {
+        button.appendChild(createToolbarCaret());
+    }
+
+    return button;
+}
+
+function createToolbarGripper() {
+    const gripper = document.createElement('div');
+    gripper.className = 'toolbar-gripper';
+    gripper.setAttribute('aria-hidden', 'true');
+    return gripper;
+}
+
+function createToolbarSeparator() {
+    const separator = document.createElement('span');
+    separator.className = 'toolbar-separator';
+    separator.setAttribute('aria-hidden', 'true');
+    return separator;
+}
+
+function createToolbarCaret() {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.classList.add('toolbar-caret');
+    svg.setAttribute('width', '16');
+    svg.setAttribute('height', '16');
+    svg.setAttribute('viewBox', '0 0 16 16');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('style', 'transform:rotate(90deg);transform-origin:center');
+    path.setAttribute('d', 'm6 4 4 4-4 4z');
+    svg.appendChild(path);
+
+    return svg;
+}
+
+function createExplorerAddressBar(win) {
+    const addressBar = document.createElement('div');
+    addressBar.className = 'address-bar explorer-address-bar';
+
+    addressBar.appendChild(createToolbarGripper());
+
+    const label = document.createElement('label');
+    label.textContent = 'Address';
+    addressBar.appendChild(label);
+
+    const icon = document.createElement('img');
+    icon.className = 'address-folder-icon';
+    icon.src = getExplorerAddressIcon(win);
+    icon.alt = '';
+    icon.setAttribute('aria-hidden', 'true');
+    addressBar.appendChild(icon);
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = getExplorerAddressValue(win);
+    input.readOnly = true;
+    addressBar.appendChild(input);
+
+    const dropdown = document.createElement('button');
+    dropdown.className = 'address-dropdown-btn';
+    dropdown.type = 'button';
+    dropdown.setAttribute('aria-label', 'Address history');
+
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', '16');
+    svg.setAttribute('height', '16');
+    svg.setAttribute('viewBox', '0 0 16 16');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('style', 'transform:rotate(90deg);transform-origin:center');
+    path.setAttribute('d', 'm5 6 4 4-4 4z');
+    svg.appendChild(path);
+    dropdown.appendChild(svg);
+    addressBar.appendChild(dropdown);
+
+    return addressBar;
+}
+
+function getExplorerAddressIcon(win) {
+    const icons = {
+        welcome: 'assets/icons/98js/html-16x16.png',
+        notepad: 'assets/icons/notepad-32x32.png',
+        network: 'assets/icons/network-32x32.png',
+        'recycle-bin': 'assets/icons/recycle-bin-32x32.png'
+    };
+
+    return icons[win.id] || 'assets/icons/98js/folder-16x16.png';
+}
+
+function getExplorerAddressValue(win) {
+    const addresses = {
+        welcome: 'C:\\WINDOWS\\Desktop\\Welcome.htm',
+        'my-computer': 'My Computer',
+        'my-documents': 'C:\\My Documents\\',
+        notepad: 'C:\\My Documents\\Retro-Web-Notes.txt',
+        network: 'Network Neighborhood',
+        'recycle-bin': 'Recycle Bin'
+    };
+
+    return addresses[win.id] || win.querySelector('.title-bar-text span')?.textContent.trim() || win.id;
+}
+
+// Status bars
+function initializeStatusBars() {
+    const windows = document.querySelectorAll('.window');
+
+    windows.forEach(win => {
+        const statusBar = win.querySelector('.status-bar');
+        if (!statusBar) {
+            return;
+        }
+
+        const fields = enhanceStatusBar(win, statusBar);
+        const defaultMessage = statusBar.dataset.defaultStatus || fields.message.textContent.trim() || 'Ready';
+        statusBar.dataset.defaultStatus = defaultMessage;
+
+        setStatusBar(win, defaultMessage);
+
+        const statusTargets = win.querySelectorAll([
+            '.menu-item',
+            '.toolbar-btn',
+            '.address-bar input',
+            '.address-dropdown-btn',
+            '.folder-icon',
+            '.browser-card',
+            '.card-link',
+            '.window-body a',
+            '.notepad-text',
+            '.title-bar-controls button'
+        ].join(','));
+
+        statusTargets.forEach(target => {
+            target.addEventListener('mouseenter', () => {
+                setStatusBar(win, getStatusMessage(target));
+            });
+            target.addEventListener('focus', () => {
+                setStatusBar(win, getStatusMessage(target));
+            });
+            target.addEventListener('mouseleave', () => {
+                resetStatusBar(win);
+            });
+            target.addEventListener('blur', () => {
+                resetStatusBar(win);
+            });
+        });
+    });
+}
+
+function enhanceStatusBar(win, statusBar) {
+    const existingMessage = statusBar.querySelector('.status-bar-field');
+    const message = existingMessage || document.createElement('p');
+    message.classList.add('status-bar-field', 'status-bar-message');
+    message.setAttribute('role', 'status');
+    message.setAttribute('aria-live', 'polite');
+
+    if (!existingMessage) {
+        statusBar.prepend(message);
+    }
+
+    let detail = statusBar.querySelector('.status-bar-detail');
+    if (!detail) {
+        detail = document.createElement('p');
+        detail.className = 'status-bar-field status-bar-detail';
+        statusBar.appendChild(detail);
+    }
+    detail.textContent = getStatusDetail(win);
+
+    let meter = statusBar.querySelector('.status-bar-meter');
+    if (!meter) {
+        meter = document.createElement('div');
+        meter.className = 'status-bar-field status-bar-meter';
+        meter.setAttribute('aria-hidden', 'true');
+        meter.innerHTML = '<span></span><span></span><span></span>';
+        statusBar.appendChild(meter);
+    }
+
+    let grip = statusBar.querySelector('.status-bar-grip');
+    if (!grip) {
+        grip = document.createElement('div');
+        grip.className = 'status-bar-grip';
+        grip.setAttribute('aria-hidden', 'true');
+        statusBar.appendChild(grip);
+    }
+
+    return { message, detail };
+}
+
+function getStatusDetail(win) {
+    const details = {
+        welcome: 'Local intranet',
+        'my-computer': '3 object(s)',
+        'my-documents': '3 file(s)',
+        internet: 'Internet zone',
+        network: 'Connected',
+        'recycle-bin': '0 bytes'
+    };
+
+    return details[win.id] || '';
+}
+
+function setStatusBar(win, message) {
+    const field = win.querySelector('.status-bar-message');
+    if (!field) {
+        return;
+    }
+
+    field.textContent = message || win.querySelector('.status-bar')?.dataset.defaultStatus || 'Ready';
+}
+
+function resetStatusBar(win) {
+    const statusBar = win.querySelector('.status-bar');
+    if (!statusBar) {
+        return;
+    }
+
+    setStatusBar(win, statusBar.dataset.defaultStatus || 'Ready');
+}
+
+function getStatusMessage(target) {
+    if (target.dataset.status) {
+        return target.dataset.status;
+    }
+
+    if (target.classList.contains('menu-item')) {
+        return `${target.textContent.trim()} commands`;
+    }
+
+    if (target.classList.contains('toolbar-btn')) {
+        const messages = {
+            Up: 'Move up one level',
+            Cut: 'Cut the selected item',
+            Copy: 'Copy the selected item',
+            Paste: 'Paste from the clipboard',
+            Undo: 'Undo the last action',
+            Delete: 'Delete the selected item',
+            Properties: 'View properties for the selected item',
+            Views: 'Change how items are displayed',
+            Back: 'Go back to the previous page',
+            Forward: 'Go forward to the next page',
+            Stop: 'Stop loading this page',
+            Refresh: 'Refresh the current page',
+            Home: 'Go to your home page',
+            Search: 'Open the search pane',
+            Favorites: 'Show favorite pages',
+            History: 'Show browsing history',
+            Print: 'Print this page'
+        };
+        return messages[target.textContent.trim()] || 'Toolbar command';
+    }
+
+    if (target.classList.contains('folder-icon')) {
+        const label = target.querySelector('.icon-label')?.textContent.trim() || 'item';
+        return target.dataset.window ? `Open ${label}` : `Select ${label}`;
+    }
+
+    if (target.classList.contains('browser-card')) {
+        const title = target.querySelector('h3')?.textContent.trim() || 'web shortcut';
+        return `Select ${title}`;
+    }
+
+    if (target.classList.contains('card-link') || target.matches('.window-body a')) {
+        const url = target.getAttribute('href');
+        if (url) {
+            try {
+                return `Open ${new URL(url).hostname}`;
+            } catch (error) {
+                return 'Open link';
+            }
+        }
+        return 'Open link';
+    }
+
+    if (target.matches('.address-bar input')) {
+        return 'Address of the current page';
+    }
+
+    if (target.classList.contains('address-dropdown-btn')) {
+        return 'Show address history';
+    }
+
+    if (target.classList.contains('notepad-text')) {
+        return 'Text editor ready';
+    }
+
+    if (target.classList.contains('minimize-btn')) {
+        return 'Minimize this window';
+    }
+
+    if (target.classList.contains('maximize-btn')) {
+        return 'Maximize or restore this window';
+    }
+
+    if (target.classList.contains('close-btn')) {
+        return 'Close this window';
+    }
+
+    return 'Ready';
+}
+
 // Taskbar
 function initializeTaskbar() {
     // Taskbar task clicks
@@ -429,7 +815,7 @@ function initializeTaskbar() {
             closeStartMenu();
 
             if (win.style.display === 'none') {
-                win.style.display = 'block';
+                win.style.display = 'flex';
                 bringToFront(win);
             } else if (win.classList.contains('active')) {
                 win.style.display = 'none';

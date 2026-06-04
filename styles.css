@@ -310,6 +310,254 @@ img.icon-image,
     border-color: var(--window-border-very-dark) var(--window-border-light) var(--window-border-light) var(--window-border-very-dark);
 }
 
+.explorer-toolbar {
+    min-height: 48px;
+    gap: 1px;
+    padding: 2px 3px 3px 2px;
+    align-items: stretch;
+    border-top: 1px solid var(--window-border-light);
+    box-shadow: inset 0 1px 0 var(--ButtonHilight);
+    overflow: hidden;
+}
+
+.toolbar-gripper {
+    width: 8px;
+    min-width: 8px;
+    align-self: stretch;
+    border-left: 1px solid var(--ButtonHilight);
+    border-right: 1px solid var(--ButtonShadow);
+    background:
+        linear-gradient(to right, transparent 0 2px, var(--ButtonShadow) 2px 3px, var(--ButtonHilight) 3px 4px, transparent 4px);
+}
+
+.explorer-toolbar-btn {
+    min-width: 50px;
+    height: 43px;
+    padding: 2px 4px 1px;
+    border: 1px solid transparent;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1px;
+    box-shadow: none;
+    line-height: 11px;
+    position: relative;
+}
+
+.explorer-toolbar-btn:hover,
+.explorer-toolbar-btn:focus {
+    border-color: var(--ButtonHilight) var(--ButtonShadow) var(--ButtonShadow) var(--ButtonHilight);
+}
+
+.explorer-toolbar-btn:active {
+    border-color: var(--ButtonShadow) var(--ButtonHilight) var(--ButtonHilight) var(--ButtonShadow);
+    padding: 3px 3px 0 5px;
+}
+
+.explorer-toolbar-btn.is-muted {
+    color: var(--GrayText);
+}
+
+.toolbar-icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+}
+
+.explorer-toolbar-btn.is-muted .toolbar-icon {
+    opacity: 0.55;
+}
+
+.toolbar-label {
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.toolbar-caret {
+    position: absolute;
+    right: 3px;
+    bottom: 11px;
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+}
+
+.toolbar-separator {
+    width: 2px;
+    min-width: 2px;
+    height: 36px;
+    align-self: center;
+    margin: 0 5px;
+    border-left: 1px solid var(--ButtonShadow);
+    border-right: 1px solid var(--ButtonHilight);
+}
+
+.toolbar-icon--back {
+    background-image: url("assets/icons/98js/toolbar/back-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--back,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--back {
+    background-image: url("assets/icons/98js/toolbar/back-active.png");
+}
+
+.explorer-toolbar-btn.is-muted .toolbar-icon--back {
+    background-image: url("assets/icons/98js/toolbar/back-disabled.png");
+}
+
+.toolbar-icon--forward {
+    background-image: url("assets/icons/98js/toolbar/forward-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--forward,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--forward {
+    background-image: url("assets/icons/98js/toolbar/forward-active.png");
+}
+
+.explorer-toolbar-btn.is-muted .toolbar-icon--forward {
+    background-image: url("assets/icons/98js/toolbar/forward-disabled.png");
+}
+
+.toolbar-icon--stop {
+    background-image: url("assets/icons/98js/toolbar/stop-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--stop,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--stop {
+    background-image: url("assets/icons/98js/toolbar/stop-active.png");
+}
+
+.toolbar-icon--refresh {
+    background-image: url("assets/icons/98js/toolbar/refresh-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--refresh,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--refresh {
+    background-image: url("assets/icons/98js/toolbar/refresh-active.png");
+}
+
+.toolbar-icon--home {
+    background-image: url("assets/icons/98js/toolbar/home-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--home,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--home {
+    background-image: url("assets/icons/98js/toolbar/home-active.png");
+}
+
+.toolbar-icon--search {
+    background-image: url("assets/icons/98js/toolbar/search-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--search,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--search {
+    background-image: url("assets/icons/98js/toolbar/search-active.png");
+}
+
+.toolbar-icon--favorites {
+    background-image: url("assets/icons/98js/toolbar/favorites-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--favorites,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--favorites {
+    background-image: url("assets/icons/98js/toolbar/favorites-active.png");
+}
+
+.toolbar-icon--history {
+    background-image: url("assets/icons/98js/toolbar/history-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--history,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--history {
+    background-image: url("assets/icons/98js/toolbar/history-active.png");
+}
+
+.toolbar-icon--print {
+    background-image: url("assets/icons/98js/toolbar/print-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--print,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--print {
+    background-image: url("assets/icons/98js/toolbar/print-active.png");
+}
+
+.toolbar-icon--up {
+    background-image: url("assets/icons/98js/toolbar/up-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--up,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--up {
+    background-image: url("assets/icons/98js/toolbar/up-active.png");
+}
+
+.toolbar-icon--cut {
+    background-image: url("assets/icons/98js/toolbar/cut-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--cut,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--cut {
+    background-image: url("assets/icons/98js/toolbar/cut-active.png");
+}
+
+.toolbar-icon--copy {
+    background-image: url("assets/icons/98js/toolbar/copy-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--copy,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--copy {
+    background-image: url("assets/icons/98js/toolbar/copy-active.png");
+}
+
+.toolbar-icon--paste {
+    background-image: url("assets/icons/98js/toolbar/paste-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--paste,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--paste {
+    background-image: url("assets/icons/98js/toolbar/paste-active.png");
+}
+
+.toolbar-icon--undo {
+    background-image: url("assets/icons/98js/toolbar/undo-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--undo,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--undo {
+    background-image: url("assets/icons/98js/toolbar/undo-active.png");
+}
+
+.toolbar-icon--delete {
+    background-image: url("assets/icons/98js/toolbar/delete-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--delete,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--delete {
+    background-image: url("assets/icons/98js/toolbar/delete-active.png");
+}
+
+.toolbar-icon--properties {
+    background-image: url("assets/icons/98js/toolbar/properties-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--properties,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--properties {
+    background-image: url("assets/icons/98js/toolbar/properties-active.png");
+}
+
+.toolbar-icon--views {
+    background-image: url("assets/icons/98js/toolbar/views-normal.png");
+}
+
+.explorer-toolbar-btn:not(.is-muted):hover .toolbar-icon--views,
+.explorer-toolbar-btn:not(.is-muted):focus .toolbar-icon--views {
+    background-image: url("assets/icons/98js/toolbar/views-active.png");
+}
+
 /* Address Bar */
 .address-bar {
     background: var(--window-bg);
@@ -321,18 +569,59 @@ img.icon-image,
     flex-shrink: 0;
 }
 
+.explorer-address-bar {
+    gap: 4px;
+    padding: 2px 3px 3px 2px;
+    min-height: 24px;
+    border-top: 1px solid var(--window-border-light);
+    box-shadow: inset 0 1px 0 var(--ButtonHilight);
+}
+
 .address-bar label {
     font-size: 11px;
+    line-height: 18px;
 }
 
 .address-bar input {
     flex-grow: 1;
-    padding: 2px 4px;
+    min-width: 0;
+    height: 20px;
+    padding: 2px 4px 2px 22px;
     border: 2px solid;
     border-color: var(--window-border-dark) var(--window-border-light) var(--window-border-light) var(--window-border-dark);
     font-family: var(--font-ui);
     font-size: 11px;
     background: #ffffff;
+}
+
+.explorer-address-bar .address-folder-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: -24px;
+    margin-left: 1px;
+    z-index: 1;
+    image-rendering: pixelated;
+    pointer-events: none;
+}
+
+.address-dropdown-btn {
+    width: 18px;
+    height: 20px;
+    margin-left: -4px;
+    padding: 0;
+    border: 2px solid;
+    border-color: var(--ButtonHilight) var(--ButtonDkShadow) var(--ButtonDkShadow) var(--ButtonHilight);
+    background: var(--window-bg);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+}
+
+.address-dropdown-btn svg {
+    display: block;
+    fill: currentColor;
 }
 
 /* Window Body */
@@ -554,24 +843,74 @@ p {
 .status-bar {
     background: var(--window-bg);
     border-top: 1px solid var(--window-border-light);
-    padding: 2px 2px;
+    padding: 2px;
     display: flex;
-    gap: 4px;
+    gap: 3px;
     align-items: center;
-    height: 22px;
+    height: 24px;
     flex: 0 0 auto;
+    min-width: 0;
 }
 
 .status-bar-field {
-    padding: 0 6px;
+    margin: 0;
+    padding: 1px 6px;
     border: 1px solid;
     border-color: var(--window-border-dark) var(--window-border-light) var(--window-border-light) var(--window-border-dark);
     font-size: 11px;
-    background: #ffffff;
+    background: var(--window-bg);
     display: flex;
     align-items: center;
-    min-height: 16px;
-    line-height: 16px;
+    min-height: 18px;
+    line-height: 14px;
+    color: var(--WindowText);
+    box-shadow: inset 1px 1px 0 var(--ButtonShadow), inset -1px -1px 0 var(--ButtonHilight);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.status-bar-message {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.status-bar-detail {
+    flex: 0 0 auto;
+    min-width: 76px;
+    justify-content: center;
+}
+
+.status-bar-meter {
+    flex: 0 0 48px;
+    justify-content: flex-start;
+    gap: 3px;
+    padding: 3px 5px;
+}
+
+.status-bar-meter span {
+    width: 8px;
+    height: 8px;
+    border: 1px solid;
+    border-color: var(--ButtonHilight) var(--ButtonShadow) var(--ButtonShadow) var(--ButtonHilight);
+    background: var(--Hilight);
+    opacity: 0.9;
+}
+
+.status-bar-grip {
+    flex: 0 0 15px;
+    width: 15px;
+    height: 15px;
+    align-self: flex-end;
+    margin-left: -1px;
+    background-image:
+        linear-gradient(135deg, transparent 0, transparent 8px, var(--ButtonShadow) 8px, var(--ButtonShadow) 9px, transparent 9px),
+        linear-gradient(135deg, transparent 0, transparent 11px, var(--ButtonShadow) 11px, var(--ButtonShadow) 12px, transparent 12px),
+        linear-gradient(135deg, transparent 0, transparent 5px, var(--ButtonHilight) 5px, var(--ButtonHilight) 6px, transparent 6px),
+        linear-gradient(135deg, transparent 0, transparent 9px, var(--ButtonHilight) 9px, var(--ButtonHilight) 10px, transparent 10px);
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
 }
 
 /* Taskbar */
@@ -867,6 +1206,10 @@ p {
     user-select: text;
 }
 
+.welcome-text {
+    min-width: 0;
+}
+
 .welcome-heading {
     display: flex;
     align-items: center;
@@ -876,6 +1219,8 @@ p {
 
 .welcome-heading h1 {
     margin: 0;
+    min-width: 0;
+    overflow-wrap: break-word;
 }
 
 .welcome-photo {
@@ -924,5 +1269,29 @@ p {
     .window {
         width: 90% !important;
         left: 5% !important;
+    }
+
+    .welcome-heading {
+        align-items: flex-start;
+    }
+
+    .welcome-logo {
+        width: 72px;
+        flex: 0 0 auto;
+    }
+
+    .welcome-text h1 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .status-bar-meter,
+    .status-bar-grip {
+        display: none;
+    }
+
+    .status-bar-detail {
+        min-width: 74px;
     }
 }

@@ -6,7 +6,7 @@
     <title>Xiang Li's Forgotten Computer</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☄️</text></svg>">
     <link rel="stylesheet" href="os-gui/build/windows-98.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20260604-all-window-toolbars">
     <!-- Iconography sourced from 98.js (https://98.js.org/). -->
 </head>
 <body>
@@ -71,7 +71,7 @@
                     <p>Here you will find what he has been (secretly) doing recently.</p>
                     <img src="Pics/img_6845.jpg" alt="Xiang (Alex) Li" class="welcome-photo">
                     <p> Xiang (Alex) Li (any pronouns) is a PhD student at the Simon Fraser University, 
-                        and research assistant at TRIUMF. He works with the nEXO collaboration 
+                        and research assistant at TRIUMF. He works with the XLZD and nEXO collaboration 
                         on the Light-only Liquid Xenon (LoLX) R&D project.
                         His research centers on characterizing the performance of Silicon Photomultipliers (SiPMs) 
                         and investigating scintillation and light production in liquid xenon, 
@@ -127,7 +127,7 @@
             </div>
         </div>
         <div class="status-bar">
-            <p class="status-bar-field">4 object(s)</p>
+            <p class="status-bar-field">3 object(s)</p>
         </div>
     </div>
 
@@ -193,20 +193,68 @@
             <div class="menu-item">File</div>
             <div class="menu-item">Edit</div>
             <div class="menu-item">View</div>
+            <div class="menu-item">Go</div>
             <div class="menu-item">Favorites</div>
             <div class="menu-item">Tools</div>
             <div class="menu-item">Help</div>
         </div>
-        <div class="toolbar">
-            <button class="toolbar-btn">Back</button>
-            <button class="toolbar-btn">Forward</button>
-            <button class="toolbar-btn">Stop</button>
-            <button class="toolbar-btn">Refresh</button>
-            <button class="toolbar-btn">Home</button>
+        <div class="toolbar explorer-toolbar" aria-label="Internet Explorer toolbar">
+            <div class="toolbar-gripper" aria-hidden="true"></div>
+            <button class="toolbar-btn explorer-toolbar-btn is-muted">
+                <span class="toolbar-icon toolbar-icon--back" aria-hidden="true"></span>
+                <span class="toolbar-label">Back</span>
+                <svg class="toolbar-caret" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                    <path style="transform:rotate(90deg);transform-origin:center" d="m6 4 4 4-4 4z"></path>
+                </svg>
+            </button>
+            <button class="toolbar-btn explorer-toolbar-btn is-muted">
+                <span class="toolbar-icon toolbar-icon--forward" aria-hidden="true"></span>
+                <span class="toolbar-label">Forward</span>
+                <svg class="toolbar-caret" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                    <path style="transform:rotate(90deg);transform-origin:center" d="m6 4 4 4-4 4z"></path>
+                </svg>
+            </button>
+            <button class="toolbar-btn explorer-toolbar-btn">
+                <span class="toolbar-icon toolbar-icon--stop" aria-hidden="true"></span>
+                <span class="toolbar-label">Stop</span>
+            </button>
+            <button class="toolbar-btn explorer-toolbar-btn">
+                <span class="toolbar-icon toolbar-icon--refresh" aria-hidden="true"></span>
+                <span class="toolbar-label">Refresh</span>
+            </button>
+            <button class="toolbar-btn explorer-toolbar-btn">
+                <span class="toolbar-icon toolbar-icon--home" aria-hidden="true"></span>
+                <span class="toolbar-label">Home</span>
+            </button>
+            <span class="toolbar-separator" aria-hidden="true"></span>
+            <button class="toolbar-btn explorer-toolbar-btn">
+                <span class="toolbar-icon toolbar-icon--search" aria-hidden="true"></span>
+                <span class="toolbar-label">Search</span>
+            </button>
+            <button class="toolbar-btn explorer-toolbar-btn">
+                <span class="toolbar-icon toolbar-icon--favorites" aria-hidden="true"></span>
+                <span class="toolbar-label">Favorites</span>
+            </button>
+            <button class="toolbar-btn explorer-toolbar-btn">
+                <span class="toolbar-icon toolbar-icon--history" aria-hidden="true"></span>
+                <span class="toolbar-label">History</span>
+            </button>
+            <span class="toolbar-separator" aria-hidden="true"></span>
+            <button class="toolbar-btn explorer-toolbar-btn">
+                <span class="toolbar-icon toolbar-icon--print" aria-hidden="true"></span>
+                <span class="toolbar-label">Print</span>
+            </button>
         </div>
-        <div class="address-bar">
-            <label>Address:</label>
+        <div class="address-bar explorer-address-bar">
+            <div class="toolbar-gripper" aria-hidden="true"></div>
+            <label>Address</label>
+            <img class="address-folder-icon" src="assets/icons/98js/html-16x16.png" alt="" aria-hidden="true">
             <input type="text" value="http://www.alexli-online.com/start.html" readonly>
+            <button class="address-dropdown-btn" aria-label="Address history">
+                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                    <path style="transform:rotate(90deg);transform-origin:center" d="m5 6 4 4-4 4z"></path>
+                </svg>
+            </button>
         </div>
         <div class="window-body browser">
             <div class="browser-content">
@@ -296,6 +344,9 @@ Happy hacking! UwU
 
 - Alex</textarea>
         </div>
+        <div class="status-bar">
+            <p class="status-bar-field">Ready</p>
+        </div>
     </div>
 
     <div class="window" id="network" style="display: none;" data-icon="assets/icons/network-32x32.png" data-width="380" data-height="280">
@@ -320,7 +371,8 @@ Happy hacking! UwU
                         <p> Research Groups:</p>
                         <li> My current boss: <a href="https://triumf.ca/people/fabrice-retiere/" target="_blank" rel="noopener">Fabrice Retiere (TRIUMF)</a></li>
                         <!-- <li> Fellow PhD student in nEXO and LoLX: <a href="https://davidgallacherphysics.com/index.html#physics" target="_blank" rel="noopener">David Gallacher</a></li> -->
-                        <li> Experiment affiliation: <a href="https://nexo.llnl.gov/nexo-overview" target="_blank" rel="noopener">nEXO Experiment</a></li>
+                        <li> Experiment affiliation: <a href="https://nexo.llnl.gov/nexo-overview" target="_blank" rel="noopener">nEXO Collaboration</a>
+                        and <a href="https://xlzd.org/" target="_blank" rel="noopener"> XLZD Collaboration.</a></li>
                         <li> My master's supervisor: <a href="https://sites.google.com/ualberta.ca/pirolab/" target="_blank" rel="noopener">Marie-cecile Piro</a></li>
                         <p> Friends links:</p>
                         <li> Technical support for building this site: <a href="https://escobarflughafen.github.io/" target="_blank" rel="noopener">Li, Jianing</a></li>
@@ -424,6 +476,6 @@ Happy hacking! UwU
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20260604-all-window-toolbars"></script>
 </body>
 </html>
