@@ -737,6 +737,10 @@ p {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230067b1'/%3E%3Crect x='0.5' y='0.5' width='31' height='31' fill='none' stroke='%23003f70' stroke-width='1'/%3E%3Crect x='7' y='13' width='4' height='12' fill='%23ffffff'/%3E%3Ccircle cx='9' cy='9' r='2' fill='%23ffffff'/%3E%3Cpath d='M15 13h3v2c0-1 1.5-2.2 3.5-2.2 2.3 0 4.5 1.3 4.5 4.8V25h-4v-6.1c0-1.4-.7-2.1-1.9-2.1-1.3 0-2.1.9-2.1 2.1V25h-4z' fill='%23ffffff'/%3E%3C/svg%3E");
 }
 
+.card-icon--contact {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23cfcfcf'/%3E%3Crect x='0.5' y='0.5' width='31' height='31' fill='none' stroke='%23505050' stroke-width='1'/%3E%3Crect x='5' y='9' width='22' height='15' fill='%23ffffff' stroke='%230f3fa1' stroke-width='2'/%3E%3Cpath d='M6 10l10 8 10-8M6 23l7-7M26 23l-7-7' fill='none' stroke='%230f3fa1' stroke-width='2'/%3E%3C/svg%3E");
+}
+
 .card-body h3 {
     margin: 0 0 4px;
     font-size: 14px;

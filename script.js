@@ -10,7 +10,9 @@ let resizeStartX = 0;
 let resizeStartY = 0;
 let resizeMinWidth = 0;
 let resizeMinHeight = 0;
+let lastOpenedWindowId = null;
 const TASKBAR_HEIGHT = 32;
+const WINDOW_CASCADE_OFFSET = 24;
 const WALLPAPER_PATH = 'wallpaper/';
 const MANIFEST_URL = `${WALLPAPER_PATH}manifest.json`;
 const DEFAULT_WALLPAPER = 'v_island.png'; // Fallback if manifest fails
@@ -264,6 +266,8 @@ function registerOpenWindows() {
         }
 
         addTaskbarTask(win.id);
+        win.dataset.opened = 'true';
+        lastOpenedWindowId = win.id;
 
         if (win.dataset.initial === 'true') {
             bringToFront(win);
@@ -301,15 +305,45 @@ function centerWindow(win) {
     win.style.top = `${top}px`;
 }
 
+function offsetWindowFromPrevious(win) {
+    if (!lastOpenedWindowId || lastOpenedWindowId === win.id) {
+        return;
+    }
+
+    const previousWindow = document.getElementById(lastOpenedWindowId);
+    if (!previousWindow || previousWindow.style.display === 'none') {
+        return;
+    }
+
+    const previousLeft = parseFloat(previousWindow.style.left) || 0;
+    const previousTop = parseFloat(previousWindow.style.top) || 0;
+    const width = win.offsetWidth || parseInt(win.style.width, 10) || parseInt(win.dataset.width, 10) || 480;
+    const height = win.offsetHeight || parseInt(win.style.height, 10) || parseInt(win.dataset.height, 10) || 360;
+    const maxLeft = Math.max(0, window.innerWidth - width);
+    const maxTop = Math.max(0, window.innerHeight - TASKBAR_HEIGHT - height);
+    const left = Math.min(previousLeft + WINDOW_CASCADE_OFFSET, maxLeft);
+    const top = Math.min(previousTop + WINDOW_CASCADE_OFFSET, maxTop);
+
+    win.style.left = `${left}px`;
+    win.style.top = `${top}px`;
+}
+
 function openWindow(windowId) {
     const win = document.getElementById(windowId);
     if (!win) return;
 
     closeStartMenu();
- 
+
+    const isFirstOpen = win.dataset.opened !== 'true';
     win.style.display = 'flex';
+    if (isFirstOpen) {
+        offsetWindowFromPrevious(win);
+        win.dataset.opened = 'true';
+    }
+
     addTaskbarTask(windowId);
     bringToFront(win);
+    lastOpenedWindowId = windowId;
 }
 
 function openWindowFromUrl() {
@@ -767,6 +801,10 @@ function getStatusMessage(target) {
     if (target.classList.contains('card-link') || target.matches('.window-body a')) {
         const url = target.getAttribute('href');
         if (url) {
+            if (url.startsWith('mailto:')) {
+                return 'Compose email';
+            }
+
             try {
                 return `Open ${new URL(url).hostname}`;
             } catch (error) {
